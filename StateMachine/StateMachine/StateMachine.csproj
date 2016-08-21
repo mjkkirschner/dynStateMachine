@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\StateMachine.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -106,7 +107,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="VMDataBridge">
-      <HintPath>..\..\..\Dynamo\bin\AnyCPU\Debug\VMDataBridge.dll</HintPath>
+      <HintPath>..\..\..\Dynamo\bin\AnyCPU\Release\VMDataBridge.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -123,7 +124,11 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
+    -->
   <Target Name="AfterBuild">
+    <ItemGroup>
+      <PackageFiles Include="$(OutDir)\StateMachine.dll;$(OutDir)\StateMachine.XML;" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PackageFiles)" DestinationFolder="$(SolutionDir)..\dynamo_package\DynamoStateMachine\bin\" />
   </Target>
-  -->
 </Project>
